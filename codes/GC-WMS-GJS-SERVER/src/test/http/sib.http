@@ -1,0 +1,53 @@
+### 登陆
+POST http://{{base_url}}/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456",
+  "username2": "admin",
+  "password2": "123456"
+}
+
+> {% client.global.set("token", response.body.retObj.token); %}
+
+### 贵金属入库
+POST http://{{base_url}}/warehouseEntry/add
+Content-Type: application/json
+token: {{token}}
+
+{
+  "wareId": 8,
+  "matId": 1,
+  "categoryId": 1
+}
+
+### 产品入库
+POST http://{{base_url}}/subwareIn/add
+Content-Type: application/json
+token: {{token}}
+
+{
+  "subware": {
+    "wareId": 8,
+    "matId": 1,
+    "categoryId": 1
+  },
+  "details": [
+    {
+      "subwareInId": 8
+    }
+  ]
+}
+
+
+### 产品出库
+POST http://{{base_url}}/subwareOut/add
+Content-Type: application/json
+token: {{token}}
+
+{
+  "wareId": 8,
+  "matId": 1,
+  "categoryId": 1
+}
